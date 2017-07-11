@@ -4,7 +4,9 @@ services:
 
     users-db:
         container_name: users-db
-        build: ../flask-microservices-users/project/db
+        #build: ../flask-microservices-users/project/db
+        build:
+            context: https://github.com/KevDi/python_docker.git#master:project/db
         ports:
             - 5435:5432 # expose ports - HOST:CONTAINER
         environment:
@@ -15,9 +17,11 @@ services:
 
     users-service:
         container_name: users-service
-        build: ../flask-microservices-users
-        volumes:
-            - '../flask-microservices-users:/usr/src/app'
+        build:
+            context: https://github.com/KevDi/python_docker.git
+        #build: ../flask-microservices-users
+        #volumes:
+        #    - '../flask-microservices-users:/usr/src/app'
         ports:
             - 5001:5000 # expose ports - HOST:CONTAINER
         environment:
